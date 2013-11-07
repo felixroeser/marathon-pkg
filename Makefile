@@ -1,6 +1,12 @@
 # Note that the prefix affects the init scripts as well.
 prefix := usr/local
 
+.PHONY: deb
+deb: version with-upstart
+	cd toor && \
+	fpm -t deb -s dir \
+	    -n marathon -v `cat ../version` -p ../marathon.deb .
+
 .PHONY: rpm
 rpm: version with-upstart
 	cd toor && \
@@ -27,7 +33,7 @@ version: plugin := org.apache.maven.plugins:maven-help-plugin:2.1.1:evaluate
 version: marathon-runnable.jar
 	( cd marathon && \
 	  mvn $(plugin) -Dexpression=project.version | sed '/^\[/d' ) | \
-	  head -n1 > version
+	  tail -n 1 > version
 
 marathon-runnable.jar:
 	cd marathon && mvn package && bin/build-distribution

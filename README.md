@@ -25,5 +25,6 @@ yum install rpm-build                   ## On RedHat/CentOS/Fedora
 ```bash
 make rpm                                ## On RedHat-alikes
 make osx                                ## For Apple Macintosh
+make deb				## On Debian-alikes
 ```
 
