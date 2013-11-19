@@ -1,6 +1,14 @@
 # Note that the prefix affects the init scripts as well.
 prefix := usr/local
 
+clean:
+	rm *.jar -f
+	rm *.rpm -f
+	rm *.deb -f
+	rm *.jar -f
+	git submodule init
+	git submodule update
+
 .PHONY: deb
 deb: version with-upstart
 	cd toor && \
@@ -35,7 +43,7 @@ version: marathon-runnable.jar
 	  mvn $(plugin) -Dexpression=project.version | sed '/^\[/d' ) | \
 	  tail -n 1 > version
 
-marathon-runnable.jar:
+marathon-runnable.jar: clean
 	cd marathon && mvn package && bin/build-distribution
 	cp marathon/target/$@ $@
 
