@@ -13,7 +13,7 @@ clean:
 deb: version with-upstart
 	cd toor && \
 	fpm -t deb -s dir \
-	    -n marathon -v `cat ../version` -p ../marathon.deb .
+	    -n marathon -v `cat ../version` -p ../marathon-`cat ../version`_amd64.deb .
 
 .PHONY: rpm
 rpm: version with-upstart
