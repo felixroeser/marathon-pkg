@@ -8,6 +8,7 @@ clean:
 	rm *.jar -f
 	git submodule init
 	git submodule update
+	rm -rf marathon/target
 
 .PHONY: deb
 deb: version with-upstart
